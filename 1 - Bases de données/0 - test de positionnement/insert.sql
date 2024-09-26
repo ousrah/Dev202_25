@@ -1,8 +1,9 @@
-use  location_202_25;
+use  location_203_25;
 
 insert into type values (1,'appartement'),(2,'villa'),(3,'garage'),(4,'maison'),(5,'duplex');
 insert into ville values (1,'tetouan'),(2,'martil'),(3,'m''diq'),(4,'tanger'),(5,'larache');
-insert into quartier values (1,'saniat rmel',1),(2,'touilaa',1),(3,'soukna wa taamir',1),(4,'chbar',2),(5,'diza',2);
+
+insert into quartier values (1,'wilaya',1),(2,'touilaa',1),(3,'soukna wa taamir',1),(4,'chbar',2),(5,'diza',2);
 insert into client (id_client, nom_client, prenom_client,telephone,adresse) values 
 							(1,'mohamed','mohamed','01','av3'),
 							(2,'marchoud','ali','02','av2'),
