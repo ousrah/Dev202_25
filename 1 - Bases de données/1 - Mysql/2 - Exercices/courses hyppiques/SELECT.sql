@@ -194,5 +194,23 @@ left join cheval par on id_pere=par.id_cheval;
 
 
 -- G.	Le montant total remporté par 'black' dans toutes les compétitions qu'il a remporté
+use courses202;
+select sum(dotation) as montant_total from cheval join participe using(id_cheval)
+join session using (id_session)
+where nom_cheval = 'black'
+and classement = 1;
+
 -- H.	La catégorie que le cheval 'black' remporte le plus
-select ceiling(rand()*19);
+
+with t1 as (
+select count(id_cheval) as nb_victoires, nom_categorie from cheval join participe using(id_cheval)
+join session using (id_session)
+join course using(id_course)
+join categorie using(id_categorie)
+where nom_cheval = 'black'
+and classement = 1
+group by nom_categorie),
+t2 as (select max(nb_victoires) as nb_victoires from t1)
+select nom_categorie from t1 join t2 using(nb_victoires);
+
+
