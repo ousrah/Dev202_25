@@ -293,11 +293,33 @@ et qui affiche le montant de la participation selon
 le prix de repas acheté par l'employé
 */
 
+drop function if exists remise;
+delimiter $$
+create function remise( prix_repas double ,salaire double,marie boolean,kids int)
+	returns varchar(40) 
+	deterministic 
+begin
+    declare r double default 0.2;
+	if salaire<2500 then
+		set r=r+0.15;
+	end if;
+    if marie=true then 
+		set r=r+0.05;
+	end if;
+	set r=r+(0.10*kids);
+    if r>0.6 then 
+		set r=0.6;
+	end if;
+    return concat('tu vas recevoir ',prix_repas*r,' du cash back');
+end $$
+delimiter ;
+select remise(100,2000,true,5);
+select remise(100,8000,false,0);
 
-     
-     
-     
-     
+
+
+
+
 
 
 
@@ -316,6 +338,29 @@ si A = 0 et B <> 0 x = impossible
 si A <>  0 x = -b/a
 */
 
+
+drop function if exists eq1d;
+delimiter //
+create function eq1d(a int, b int)
+	returns varchar(45)
+    deterministic
+begin
+	if a = 0 then
+		if b=0 then
+			return "R";
+		else
+			return "Impossible";
+        end if;
+	else
+		return -b/a;
+	end if;
+end //
+delimiter ;
+
+select eq1d(0,0);
+select eq1d(0,2);
+select eq1d(2,1);
+select eq1d(2,0);
 
 
 
@@ -338,10 +383,210 @@ si A <> 0
 
 
 
+drop function if exists eq2d;
+delimiter //
+create function eq2d(a int, b int, c int)
+	returns varchar(45)
+    deterministic
+begin
+	declare d  double;
+	if a = 0 then
+		if b=0 then
+			if c = 0 then
+				return "R";
+			else
+				return "Impossible";
+			end if;
+		else
+			return -c/b;
+		end if;
+	else
+		set d = pow(b,2)-(4*a*c);
+        if d<0 then
+			return 'impossible dans R';
+        elseif d=0 then
+			return concat('x1=x2=',-b/(2*a)); 
+        else
+			return concat('x1=',(-b-sqrt(d))/(2*a),' x2=', (-b+sqrt(d))/(2*a)) ; 
+        end if;
+	end if;
+end //
+delimiter ;
 
+select eq2d(0,0,0);
+select eq2d(0,0,1);
+select eq2d(0,2,1);
+select eq2d(2,4,2);
+select eq2d(2,6,2);
+select eq2d(2,2,2);
+
+
+#l'instruction case
+
+
+drop function if exists feuRouge;
+delimiter $$
+create function feuRouge(color varchar(10))
+	returns varchar(45)
+    deterministic
+begin
+	declare r varchar(45);
+    case color
+    when "red" then set r = "stop";
+    when "green" then set r = "go";
+    when "orange" then set r = "calm down";
+    else
+		set r = "error";
+    end case;
+    return r;
+end $$
+delimiter ;
+
+select feuRouge("black");
+
+
+
+
+drop function if exists feuRouge;
+delimiter $$
+create function feuRouge(color varchar(10))
+	returns varchar(45)
+    deterministic
+begin
+	declare r varchar(45);
+    case 
+		when color="red" then set r = "stop";
+		when color="green" then set r = "go";
+		when color="orange" then set r = "calm down";
+    else
+		set r = "error";
+    end case;
+    return r;
+end $$
+delimiter ;
+
+
+
+
+drop function if exists feuRouge;
+delimiter $$
+create function feuRouge(color varchar(10))
+	returns varchar(45)
+    deterministic
+begin
+	declare r varchar(45);
+    set r = case  color
+					when "red" then  "stop"
+					when "green" then "go"
+					when "orange" then  "calm down"
+			else
+					"error"
+			end;
+    return r;
+end $$
+delimiter ;
+
+
+
+
+select feuRouge("red");
+select feuRouge("green");
+select feuRouge("orange");
+select feuRouge("black");
+
+#Exercice
+
+#Ecrire un fonction qui accept le numero d''une journée et qui affiche son nom en arabe
+
+"الأحد"
+"الإثنين"
+"الثلاثاء"
+"الأربعاء"
+"الخميس"
+"الجمعة"
+"السبت"
 
 
 # les boucles
+
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+	returns int
+    deterministic
+begin
+    declare s int default 0;
+    declare i int default 1;
+    while i <= n do
+		set s = s + i;
+        set i= i + 1;
+    end while;
+    return s;
+end $$
+delimiter ;
+
+select somme(5);
+
+
+
+drop function if exists somme;
+delimiter $$
+create function somme (n int)
+	returns int
+    deterministic
+begin
+	declare s int default 0;
+    declare i int default 0;
+    repeat
+		set s = s +i;
+        set i = i + 1;
+	until i>n end repeat;
+	return s;
+end $$
+delimiter ;
+
+select somme(0); -- 0
+select somme(1); -- 1
+select somme(5); -- 15
+
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+	returns int
+    deterministic
+begin
+	declare s int default 0;
+    declare i int default 0;
+    l1: loop
+		set s = s+i;
+        set i = i+1;
+        if i>n then
+			leave l1;
+        end if;
+	end loop;
+    return s;
+end $$
+delimiter ;
+
+select somme(0); -- 0
+select somme(1); -- 1
+select somme(5); -- 15
+
+
+#Exercice 
+#ecrire une fonction qui calcule la somme des entiers paires 
+# inférieures à un entier entré en paramètres
+#utilisez les trois formes des boucles sur trois solutions différents
+
+
+#ecrire une fonction qui calcule le factoriel d'un entier
+# Rappel 5! = 5x4x3x2
+# 1! = 1
+# 0! = 1
+
+
+
+
 
 #les fonctions
 
