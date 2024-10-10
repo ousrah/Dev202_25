@@ -587,6 +587,24 @@ select somme(5); -- 15
 
 
 
+use courses202;
+drop function if exists getDotation;
+delimiter $$
+create function getDotation(id_s int)
+	returns long
+    deterministic
+begin
+	declare r long;
+    select dotation into r from session where id_session = id_s;
+    return r;
+end $$
+delimiter ;
+
+
+set @n = 1;
+select getDotation(@n);
+
+
 
 #les fonctions
 
