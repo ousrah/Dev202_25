@@ -498,13 +498,41 @@ select feuRouge("black");
 
 #Ecrire un fonction qui accept le numero d''une journée et qui affiche son nom en arabe
 
-"الأحد"
+/*"الأحد"
 "الإثنين"
 "الثلاثاء"
 "الأربعاء"
 "الخميس"
 "الجمعة"
-"السبت"
+"السبت"*/
+
+
+drop function if exists jour;
+delimiter $$
+create function jour(j int)
+	returns varchar(50)
+    deterministic
+begin
+	declare r varchar(50);
+    case j
+    when 1 then set r="الأحد";
+    when 2 then set r="الإثنين";
+    when 3 then set r="الثلاثاء";
+    when 4 then set r="الأربعاء";
+    when 5 then set r="الخميس";
+    when 6 then set r="الجمعة";
+    when 7 then set r="السبت";
+	else 
+		set r="choix invalide";
+    end case;
+    return r;
+end $$
+delimiter ;
+
+select jour(1);
+select jour(0);
+select jour(5);
+
 
 
 # les boucles
@@ -578,11 +606,77 @@ select somme(5); -- 15
 # inférieures à un entier entré en paramètres
 #utilisez les trois formes des boucles sur trois solutions différents
 
+drop function if exists somme;
+delimiter $$
+create function somme(n int)
+	returns int
+    deterministic
+begin
+    declare s int default 0;
+    declare i int default 2;
+    while i <= n do
+		set s = s + i;
+        set i= i + 2;
+    end while;
+    return s;
+end $$
+delimiter ;
+select somme(3);-- 2
+select somme(4); -- 6
+select somme(5);-- 6
+select somme(6); -- 12
+
+
+drop function somme;
+delimiter $$
+create function somme(n int)
+	returns int
+    deterministic
+begin
+    declare s int default 0;
+    declare i int default 2;
+    while i <= n do
+		if i%2 =0 then
+			set s = s + i;
+		end if ;
+        set i= i + 1;
+    end while;
+    return s;
+end $$
+delimiter ;
+select somme(3);-- 2
+select somme(4); -- 6
+select somme(5);-- 6
+select somme(6); -- 12
+
 
 #ecrire une fonction qui calcule le factoriel d'un entier
 # Rappel 5! = 5x4x3x2
 # 1! = 1
 # 0! = 1
+drop function if exists factoriel;
+delimiter $$
+create function factoriel(n int)
+returns varchar(50)
+deterministic
+begin
+    declare resultat int default 1;
+    declare i int ;
+	if n <0 then
+		return "erreur";
+	end if;
+    set i = n;
+    while i > 1 do
+        set resultat = resultat * i; 
+        set i = i - 1;  
+    end while;
+    return resultat;
+end $$
+delimiter ;
+select factoriel(5);  
+select factoriel(0);  
+select factoriel(1);  
+select factoriel(-1);  
 
 
 
