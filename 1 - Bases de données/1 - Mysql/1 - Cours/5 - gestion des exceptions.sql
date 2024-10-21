@@ -196,3 +196,45 @@ call new_product('imprimante',-1000);  #3819
 call new_product('imprimante',3000);  #1062
 call new_product(null,3000);  #1048
 
+
+
+
+
+#not fount
+
+drop procedure if exists get_product;
+delimiter $$
+create procedure get_product(id int, out name varchar(50))
+begin
+	declare exit handler for not found set name = "aucun produit trouvé";
+	select nom_produit into name from  produit where id_produit = id;
+end $$
+delimiter ;
+
+select * from produit;
+call get_product(1,@n);
+select @n;
+
+
+
+drop procedure if exists diviser;
+delimiter $$
+create procedure diviser(a int, b int, out r double)
+begin
+	declare div_par_zero condition for sqlstate '11111';
+    declare continue handler for div_par_zero resignal set message_text = "impossible de diviser par zero";
+	if b=0 then
+		signal  div_par_zero;
+    else
+		set r = a/b;
+    end if;
+end $$
+delimiter ;
+
+
+call diviser(3,0,@i);
+select @i;
+
+call diviser(3,0,@i);
+select @i;
+
