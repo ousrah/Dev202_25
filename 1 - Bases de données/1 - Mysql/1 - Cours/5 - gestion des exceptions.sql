@@ -137,7 +137,7 @@ call new_product(null,3000);  #1048
 
 
 #produre d'insertion des produits avec gestion des erreurs par sqlstate
-
+# https://www.briandunning.com/error-codes/?source=MySQL
 drop procedure if exists new_product;
 delimiter $$
 create procedure new_product(name varchar(50), price double)
