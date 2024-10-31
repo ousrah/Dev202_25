@@ -49,7 +49,7 @@ CREATE TABLE orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('pending', 'shipped', 'delivered', 'cancelled') DEFAULT 'pending',
+    status varchar(40) DEFAULT 'pending',
     total_amount DECIMAL(10, 2),
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
@@ -137,7 +137,8 @@ INSERT INTO orders (customer_id, status, total_amount) VALUES
     (8, 'pending', NULL),
     (9, 'shipped', NULL),
     (10, 'delivered', NULL),
-     (11, 'new_order', NULL);
+    (10,'new_order',Null)
+    ;
 
 -- Insert order lines
 INSERT INTO order_lines (order_id, product_id, quantity, price) VALUES
