@@ -137,8 +137,7 @@ INSERT INTO orders (customer_id, status, total_amount) VALUES
     (8, 'pending', NULL),
     (9, 'shipped', NULL),
     (10, 'delivered', NULL),
-    (10,'new_order',Null)
-    ;
+    (10,'new_order',Null);
 
 -- Insert order lines
 INSERT INTO order_lines (order_id, product_id, quantity, price) VALUES
