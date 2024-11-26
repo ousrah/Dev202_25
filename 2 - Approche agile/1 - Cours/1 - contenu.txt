@@ -1,0 +1,18 @@
+Approche Agile 100h 75 présentiel 25 a distance
+
+Généralité et définitions sur la gestion des projets
+
+La méthode Agile - Scrum
+
+MS PROJECT digramme de gantt et le diagramme de pert
+
+Atlasian JIRA
+
+GIT - GITHUB et GITLAB
+DOCKER - installation d'un enviremment de developpment php/MySQL (apache sous linux et nginx sous linux)
+
+SonarCube la qualité de logiciel
+
+Les CI/CD intégration continue et déploiement continue
+
+
