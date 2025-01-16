@@ -1,0 +1,31 @@
+Generalité Git
+
+Git config
+
+git init
+
+git status
+git add
+git commit
+git log
+
+.gitignore
+git diff
+
+git checkout
+
+
+
+#recherche a faire
+
+
+git revert
+git reset (--soft, --hard, --mixed)
+git restore
+git branch
+git merge
+git push
+git pull
+
+
+
