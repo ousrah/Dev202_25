@@ -1,0 +1,11 @@
+Contrôle 1 - Pratique exercice jira, exercice ms project
+
+
+Contrôle 2 - Scrumble  document word (rapport)
+(titre du projet, description, le back log
+(les composantes, les epics, les user stories (id, taille, valeur, nb taches, durée en h, description, les prédécesseurs),
+burn down, burn up, tableau de repartition des US (taille/valeur) , les tâches réalisées par sprint, la simulation sur jira (captures d'ecrans), simulation sur ms project (captures d'ecran gantt, pert(chemin critique), liste des problèmes rencontrés et mesures correctifs)
+
+ 
+Contrôle 3 - Théorique (questions de cours la gestion de projects,
+questions de cours agile et scrum, exercice git, diagramme pert diagramme gantt 
