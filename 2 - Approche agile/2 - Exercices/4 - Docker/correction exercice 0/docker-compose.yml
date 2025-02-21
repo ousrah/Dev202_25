@@ -6,7 +6,8 @@ services:
     restart: unless-stopped
     ports:
       - 3309:3306
+      - 33090:33060
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
-      - d:\mysqldata:/var/lib/mysql
+      - d:\datamysql:/var/lib/mysql
