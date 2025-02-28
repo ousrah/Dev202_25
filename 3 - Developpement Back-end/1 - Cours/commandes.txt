@@ -24,3 +24,29 @@ extension=openssl
 extension=pdo_mysql
 extension=xsl
 extension=zip
+
+
+
+laravel new myProject
+
+cd myPorject
+
+npm run build
+
+php artisan serve
+
+
+ouvrir le project sur vsCode
+ouvrir le fichier .env
+configurer la connection avec MySQL
+
+
+ouvrir le terminal
+php artisan migrate
+php artisan serve
+
+
+
+
+
+
