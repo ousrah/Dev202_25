@@ -45,6 +45,17 @@ ouvrir le terminal
 php artisan migrate
 php artisan serve
 
+2ème méthode
+composer create-project laravel/laravel project2
+ouvrir le project sur vsCode
+ouvrir le fichier .env
+configurer la connection avec MySQL
+
+
+pour installer une version spécifique de laravel
+composer create-project laravel/laravel project3 11.*
+
+
 
 
 
