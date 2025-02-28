@@ -1,0 +1,26 @@
+php --version --> 8.2 et sup
+composer --version  --> 2.7 et sup
+MySQL --version  --> 8.0 et sup
+
+composer global require laravel/installer
+
+laravel --version  --> 5.12
+
+
+
+activer ces extensions sur votre php.ini
+
+extension_dir = "ext"
+
+extension=bz2
+extension=curl
+extension=fileinfo
+extension=gd
+extension=gettext
+extension=gmp
+extension=intl
+extension=mbstring
+extension=openssl
+extension=pdo_mysql
+extension=xsl
+extension=zip
